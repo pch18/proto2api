@@ -1,6 +1,6 @@
 {
   "name": "@pch18/proto2api",
-  "version": "0.0.8",
+  "version": "0.0.9",
   "description": "Convert proto file to api file",
   "bin": {
     "proto2api": "./bin/index"
