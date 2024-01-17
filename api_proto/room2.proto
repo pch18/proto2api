@@ -1,0 +1,5 @@
+syntax = "proto3";
+package api_room;
+option go_package = "easbnb-service/app/http_pms/api_out/api_room";
+
+message Room2 { string id = 1; }

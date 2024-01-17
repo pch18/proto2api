@@ -1,0 +1,15 @@
+syntax = "proto3";
+package api_room;
+option go_package = "easbnb-service/app/http_pms/api_out/api_room";
+
+import "api_proto/room2.proto";
+
+service RoomService {
+  rpc Get(GetReq) returns (GetResp) {}
+}
+
+message GetReq { string id = 1; }
+
+message GetResp { Room1 room = 1; }
+
+message Room1 { Room2 test22 = 7; }
