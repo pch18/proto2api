@@ -1,6 +1,6 @@
 {
   "name": "protoc-gen-tsapi",
-  "version": "0.0.9",
+  "version": "0.0.10",
   "description": "Convert proto file to api file",
   "bin": {
     "protoc-gen-tsapi": "./bin/index"
