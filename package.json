@@ -1,6 +1,6 @@
 {
   "name": "protoc-gen-api",
-  "version": "0.0.10",
+  "version": "0.0.11",
   "description": "Convert proto file to api file",
   "bin": {
     "protoc-gen-api": "./bin/index"
