@@ -1,14 +1,14 @@
 {
-  "name": "@pch18/proto2api",
+  "name": "protoc-gen-tsapi",
   "version": "0.0.9",
   "description": "Convert proto file to api file",
   "bin": {
-    "proto2api": "./bin/index"
+    "protoc-gen-tsapi": "./bin/index"
   },
   "packageManager": "pnpm@6.32.3",
   "repository": {
     "type": "git",
-    "url": "https://github.com/pch18/proto2api"
+    "url": "https://github.com/pch18/protoc-gen-tsapi"
   },
   "main": "dist/index.js",
   "types": "dist/index.d.js",
