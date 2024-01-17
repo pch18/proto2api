@@ -9,5 +9,5 @@ publish: clean
 	pnpm install
 	pnpm run build
 	npm version patch
-	npm publish
+	npm publish --access public
 	git push

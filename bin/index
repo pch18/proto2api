@@ -37,28 +37,24 @@ program
   .description(pkg.description)
   .action(async (opt) => {
     const dirPath = resolve(opt.dir);
-    if (!fse.existsSync(dirPath)) {
-      console.error(`The address ${dirPath} does not exist`);
-      return process.exit(1);
-    }
+
     let files = [];
-    if (opt.dir.endsWith(".proto")) {
-      files.push(dirPath);
+    if (dirPath.endsWith(".proto")) {
+      files = await getPathsDir(dirPath);
     } else {
       files = await getPathsDir(dirPath + "/**/*.proto");
     }
     if (files.length === 0) {
-      console.error(
-        `The corresponding proto file was not found under the ${dirPath}`
-      );
+      console.error(`The address ${dirPath} does not exist`);
       return process.exit(1);
     }
 
-    let protoDir = opt.protoDir || "";
-    if (!protoDir) {
-      const result = files[0].match(/\S*proto[2|3]{1}/);
-      protoDir = result ? result[0] : "";
+    let protoDir = opt.protoDir;
+    if (!opt.protoDir) {
+      const result = dirPath.match(/(.*proto[2|3]?)\//);
+      protoDir = result ? result[1] : ".";
     }
+    protoDir = resolve(protoDir)
 
     const devMode = opt.debug;
 
@@ -78,9 +74,10 @@ program
       apiName: opt.apiName,
       apiPath: opt.apiPath,
       apiPrefixPath: opt.prefix,
-      protoDir: resolve(protoDir),
+      protoDir: protoDir,
       depPath: opt.depPath,
       ignore,
+      devMode,
     };
 
     if (devMode) {

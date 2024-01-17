@@ -17,10 +17,14 @@ export interface Options {
   apiPrefixPath: string;
   depPath: string;
   ignore?: RegExp; // ignore
+  devMode?: boolean;
 }
 
 export function main(options: Options) {
-  console.log(options);
+  if (options.devMode) {
+    console.log(options);
+  }
+
   const apiFileMap = getProto2ApiData(options);
 
   const result = genCode({
