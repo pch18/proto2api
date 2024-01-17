@@ -18,7 +18,7 @@ import {
   error,
   getRelativePathABDepth,
   log,
-  recursionDirFindPath,
+  // recursionDirFindPath,
 } from "../utils";
 import { Options } from "../index";
 
@@ -177,36 +177,20 @@ export function parseProto(
   const notFoundList = [];
   // Parse the imported PB to get the absolute path
   root.resolvePath = (origin, target) => {
-    if (!protoDir && root.nested && root.files.length > 0) {
-      const keys = Object.keys(root.nested);
-      const firstPath = root.files[0];
-      const reg = firstPath.match(new RegExp(`/${keys[0]}/`));
-      reg && (protoDir = firstPath.slice(0, reg.index));
-    }
+    // if (!protoDir && root.nested && root.files.length > 0) {
+    //   const keys = Object.keys(root.nested);
+    //   const firstPath = root.files[0];
+    //   const reg = firstPath.match(new RegExp(`/${keys[0]}/`));
+    //   reg && (protoDir = firstPath.slice(0, reg.index));
+    // }
+    const pathTarget = resolve(target)
     let pathObj = {
-      path: target,
-      target: target.replace(protoDir, ""),
+      path: pathTarget,
+      target: pathTarget.replace(new RegExp(`^${protoDir}`), ""),
     };
+
     if (!existsSync(pathObj.path)) {
-      if (target.match(/^google/)) {
-        pathObj = recursionDirFindPath(
-          resolve(__dirname, "../../", "common"),
-          target
-        );
-      } else {
-        const originDir = origin.slice(0, origin.lastIndexOf("/"));
-        pathObj = recursionDirFindPath(protoDir, target);
-        // This happens when the pb directory has no upper directory
-        if (!protoDir) {
-          protoDir = originDir;
-        }
-      }
-
-      if (!pathObj.path && dependencyPath) {
-        pathObj = recursionDirFindPath(dependencyPath, target);
-      }
-
-      if (!pathObj.path && !notFoundList.find((k) => k === target)) {
+      if (!notFoundList.includes(target)) {
         notFoundList.push(target);
       }
     }
@@ -228,8 +212,8 @@ export function parseProto(
       error(
         "The following proto could not be found, if it is this project file, please try to specify --protoDir, if it is an external dependency file, please try to specify --depPath"
       );
-      console.log(notFoundList);
-      console.log();
+      console.error(notFoundList);
+      process.exit(1)
     }
   }
   // remove absolute path

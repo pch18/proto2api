@@ -1,9 +1,15 @@
 # 用于把proto文件转换成特定语言的api文件
 
+## fork 修改记录
+1. 修复 protoDir 问题，现象：proto 文件中的 import 再 -d 加入转换后认为是不同的文件，导致 duplicate 错误
+1. 默认请求地址，根据 service 和 method 名称生成
+
+
+## 使用说明
+
 1. 先把需要转换的proto文件确定好
 2. 依次遍历proto文件，然后转换成ts文件
 
-具体使用方式：https://www.yuque.com/yuexing0921/blog/ebmrh5
 
 ## 快速开始
 ``` bash

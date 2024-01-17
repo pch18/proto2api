@@ -230,6 +230,9 @@ export function serviceGenApiFunction(item: protoJs.Service): ApiModule {
     name: item.name,
     functions: item.methodsArray.map((k) => {
       const httpType = getHttpType(k.options);
+      let url = httpType.url || `/${item.name}/${k.name}` ;
+
+      console.log( httpType.url ,item.name)
 
       let comment = k.comment || "";
       const redirectReg = comment.match(/\@redirect\s*(\S+)/);
@@ -252,7 +255,7 @@ export function serviceGenApiFunction(item: protoJs.Service): ApiModule {
         comment,
         req,
         // reqResolvedPath: resFn === k.filename ? "" : resFn,
-        url: httpType.url,
+        url: url,
         redirectUrl,
         res,
         // resResolvedPath: repFn === k.filename ? "" : repFn,

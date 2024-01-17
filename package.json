@@ -1,5 +1,5 @@
 {
-  "name": "proto2api",
+  "name": "@pch18/proto2api",
   "version": "0.0.8",
   "description": "Convert proto file to api file",
   "bin": {
@@ -8,7 +8,7 @@
   "packageManager": "pnpm@6.32.3",
   "repository": {
     "type": "git",
-    "url": "https://github.com/yuexing0921/proto2api"
+    "url": "https://github.com/pch18/proto2api"
   },
   "main": "dist/index.js",
   "types": "dist/index.d.js",
@@ -20,7 +20,7 @@
   "keywords": [
     "proto"
   ],
-  "author": "yuexing <yuexing0921@gmail.com>",
+  "author": "pch18 <pch18@qq.com>",
   "license": "MIT",
   "dependencies": {
     "chalk": "^4.1.0",
@@ -28,7 +28,7 @@
     "fs-extra": "^10.0.0",
     "glob": "^7.2.0",
     "prettier": "^2.5.1",
-    "protobufjs": "^6.11.2",
+    "protobufjs": "^7.2.6",
     "ts-node": "^10.7.0"
   },
   "devDependencies": {
