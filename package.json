@@ -1,14 +1,14 @@
 {
-  "name": "protoc-gen-api",
+  "name": "protoc-gen-ts-req",
   "version": "0.0.11",
   "description": "Convert proto file to api file",
   "bin": {
-    "protoc-gen-api": "./bin/index"
+    "protoc-gen-ts-req": "./bin/index"
   },
   "packageManager": "pnpm@6.32.3",
   "repository": {
     "type": "git",
-    "url": "https://github.com/pch18/protoc-gen-api"
+    "url": "https://github.com/pch18/protoc-gen-ts-req"
   },
   "main": "dist/index.js",
   "types": "dist/index.d.js",
