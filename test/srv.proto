@@ -1,0 +1,19 @@
+syntax = "proto3";
+package api_common;
+option go_package = "easbnb-service/api_out/http_pms/api_common";
+
+import "test/type.proto";
+
+service CommonService {
+  rpc ListRemarkPreview(ListRemarkReq) returns (ListRemarkResp) {}
+}
+
+
+message ListRemarkReq {
+  Remark.Entity entity = 1;
+  Remark.Child child = 2;
+}
+
+message ListRemarkResp {
+  repeated Remark remarks = 1;
+}

@@ -20,9 +20,9 @@ export function renderComment(
 ): string {
   const str = comment
     ? comment
-        .split("\n")
-        .map((k) => `// ${k}`)
-        .join("\n")
+      .split("\n")
+      .map((k) => `// ${k}`)
+      .join("\n")
     : "";
   if (str) return isNewline ? str + "\n" : str;
   else return str;
@@ -39,6 +39,16 @@ function renderTypeName(
       name = name + " as " + toHump(info.aliasName, true);
     } else {
       name = toHump(info.aliasName, true);
+    }
+    return name;
+  }
+
+  // console.log(info.type, info.aliasName)
+  if (info.aliasName) {
+    if (isImport) {
+      name = info.aliasName.split('.')[0]
+    } else {
+      name = info.aliasName
     }
   }
   return name;
@@ -64,6 +74,9 @@ export function renderImport(list: Import[], messageMap: { [key: string]: 1 }) {
             true
           )
         )
+        .reduce((acc, item) => {
+          return acc.includes(item) ? acc : [...acc, item];
+        }, [])
         .join(",")} } from '${k.moduleSpecifier}'`;
     })
     .join("\n");
@@ -91,9 +104,8 @@ export function renderImport(list: Import[], messageMap: { [key: string]: 1 }) {
 export function renderEnum(list: Enum[]) {
   const renderMembers = (member: EnumMember) => {
     if (member.initializer && isNaN(member.initializer as number)) {
-      return `${renderComment(member.comment)}${member.name} = '${
-        member.initializer
-      }'`;
+      return `${renderComment(member.comment)}${member.name} = '${member.initializer
+        }'`;
     } else {
       return `${renderComment(member.comment)}${member.name}`;
     }

@@ -1,6 +1,6 @@
 {
   "name": "protoc-gen-ts-req",
-  "version": "0.0.12",
+  "version": "0.0.13",
   "description": "Convert proto file to api file",
   "bin": {
     "protoc-gen-ts-req": "./bin/index"
@@ -13,7 +13,7 @@
   "main": "dist/index.js",
   "types": "dist/index.d.js",
   "scripts": {
-    "dev": "tsc --watch",
+    "dev": "node --inspect ./bin/index -d ./test -o ./test_out --debug",
     "test": "jest",
     "build": "tsc"
   },

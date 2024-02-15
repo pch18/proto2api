@@ -232,7 +232,7 @@ export function serviceGenApiFunction(item: protoJs.Service): ApiModule {
       const httpType = getHttpType(k.options);
       let url = httpType.url || `/${item.name}/${k.name}` ;
 
-      console.log( httpType.url ,item.name)
+      // console.log( httpType.url ,item.name)
 
       let comment = k.comment || "";
       const redirectReg = comment.match(/\@redirect\s*(\S+)/);
