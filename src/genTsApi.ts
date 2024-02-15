@@ -227,7 +227,7 @@ export function renderInterface(
     .join("\n\n");
 }
 
-const configStr = "config?";
+const configStr = "config?: any";
 /**
  * list  = [{
  *  name: 'getStatus',
@@ -334,7 +334,7 @@ export function genCode(options: GenCodeOptions): {
     apiName,
     apiPath,
     apiPrefixPath,
-    eslintDisable = true,
+    eslintDisable = false,
   } = options;
 
   for (const fileName in apiFileMap) {
