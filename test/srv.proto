@@ -1,20 +1,11 @@
 syntax = "proto3";
-package api_common;
-option go_package = "easbnb-service/api_out/http_pms/api_common";
+package srv;
 
-import "test/type.proto";
+import "test/otter_pkg.proto";
+import "test/srv2.proto";
 
-service CommonService {
-  rpc ListRemarkPreview(ListRemarkReq) returns (ListRemarkResp) {}
+message MainMsg {
+  otter_pkg.OtterMsg field_otterMsg = 2;
+  Srv2 field_srv2=3;
 }
 
-
-message ListRemarkReq {
-  Remark.Entity entity = 1;
-  Remark.Child child = 2;
-  Rppppp rpp=3;
-}
-
-message ListRemarkResp {
-  repeated Remark remarks = 1;
-}

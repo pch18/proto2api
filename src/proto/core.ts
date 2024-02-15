@@ -1,4 +1,4 @@
-import protoJs from "protobufjs";
+import protoJs, { ReflectionObject } from "protobufjs";
 import { isPrototype } from "../utils";
 import {
   Interface,
@@ -120,6 +120,11 @@ export function typeGenInterface(item: protoJs.Type): Interface {
       } else if (field.resolvedType.filename) {
         dependencyType = DependencyType.EXTERNAL;
         dependencyTypeName = field.type;
+        const targetPkgName = tracePkgName(field.resolvedType)
+        const currentPkgName = tracePkgName(item)
+        if (targetPkgName !== currentPkgName) {
+          dependencyTypeName = field.type.split('.')[1] || field.type
+        }
       }
       member.propertyType = {
         ...member.propertyType,
@@ -134,6 +139,17 @@ export function typeGenInterface(item: protoJs.Type): Interface {
 
   return result;
 }
+
+function tracePkgName(node: ReflectionObject) {
+  let cur = node
+  let name = node.name
+  while (cur.parent) {
+    name = cur.name
+    cur = cur.parent
+  }
+  return name
+}
+
 export function insertImport(arr: Import[], k: PropertyType) {
   const index = arr.findIndex((a) => k.resolvedPath === a.resolvedPath);
   if (index > -1) {
@@ -231,7 +247,7 @@ export function serviceGenApiFunction(item: protoJs.Service): ApiModule {
     name: item.name,
     functions: item.methodsArray.map((k) => {
       const httpType = getHttpType(k.options);
-      let url = httpType.url || `/${item.name}/${k.name}` ;
+      let url = httpType.url || `/${item.name}/${k.name}`;
 
       // console.log( httpType.url ,item.name)
 

@@ -1,0 +1,7 @@
+syntax = "proto3";
+package srv;
+
+
+message Srv2 {
+  uint32 test = 1;
+}

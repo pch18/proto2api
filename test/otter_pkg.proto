@@ -1,0 +1,4 @@
+syntax = "proto3";
+package otter_pkg;
+
+message OtterMsg { string id = 11; }
