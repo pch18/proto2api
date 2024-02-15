@@ -12,6 +12,7 @@ service CommonService {
 message ListRemarkReq {
   Remark.Entity entity = 1;
   Remark.Child child = 2;
+  Rppppp rpp=3;
 }
 
 message ListRemarkResp {

@@ -18,3 +18,5 @@ message Remark {
 
   message Child { uint64 test = 1; }
 }
+
+message Rppppp { Remark.Entity ennnn = 1; }

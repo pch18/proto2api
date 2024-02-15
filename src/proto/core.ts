@@ -103,7 +103,7 @@ export function typeGenInterface(item: protoJs.Type): Interface {
       // }
       // member.type = field.type.match(/google/) ? field.resolvedType.name : '{}'
       // write reference path
-      const type = getGoogleCommon(field.type) || field.resolvedType.name;
+      let type = getGoogleCommon(field.type) || field.resolvedType.name;
       const resolvedPath =
         field.filename === field.resolvedType.filename
           ? ""
@@ -115,6 +115,7 @@ export function typeGenInterface(item: protoJs.Type): Interface {
           dependencyType = DependencyType.INLINE;
         } else {
           dependencyType = DependencyType.CURRENT;
+          type = field.type
         }
       } else if (field.resolvedType.filename) {
         dependencyType = DependencyType.EXTERNAL;

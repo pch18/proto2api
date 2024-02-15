@@ -86,6 +86,10 @@ program
       });
       const { main } = require(`${__dirname}/../src/index`);
       main(options);
+      const isInspect = process.execArgv.some(arg => arg.startsWith('--inspect'));
+      if (isInspect) {
+        setInterval(() => { }, 100000000)
+      }
     } else {
       const { main } = require(`${__dirname}/../dist/index`);
       main(options);
