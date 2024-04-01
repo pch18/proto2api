@@ -179,8 +179,8 @@ export function enumGenEnum(item: protoJs.Enum): Enum {
     comment: item.comment,
     members: Object.keys(item.values).map((k) => ({
       name: k,
-      // initializer: item.values[k],
-      initializer: k,
+      initializer: item.values[k],
+      // initializer: k,
       comment: item.comments[k],
     })),
   };

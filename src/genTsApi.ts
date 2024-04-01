@@ -103,9 +103,12 @@ export function renderImport(list: Import[], messageMap: { [key: string]: 1 }) {
  */
 export function renderEnum(list: Enum[]) {
   const renderMembers = (member: EnumMember) => {
-    if (member.initializer && isNaN(member.initializer as number)) {
-      return `${renderComment(member.comment)}${member.name} = '${member.initializer
-        }'`;
+    // if (member.initializer && isNaN(member.initializer as number)) {
+
+    if (typeof member.initializer == "number") {
+      return `${renderComment(member.comment)}${member.name} = ${member.initializer}`;
+    } else if (typeof member.initializer == "string") {
+      return `${renderComment(member.comment)}${member.name} = '${member.initializer}'`;
     } else {
       return `${renderComment(member.comment)}${member.name}`;
     }
@@ -270,7 +273,7 @@ export function renderFunction(
   return list
     .map((k) => {
       const reqStr = k.req.type
-        ? `req: Partial<${getType(k.req, messageMap)}>, ${configStr}`
+        ? `req: ${getType(k.req, messageMap)}, ${configStr}`
         : configStr;
       return `${renderComment(k.comment)}export function ${k.name}(${reqStr}){
             ${renderReturn(k)}
@@ -285,22 +288,23 @@ export function renderApiModule(
   apiPrefixPath: string,
   messageMap: { [key: string]: 1 }
 ): string {
-  // return list
-  //   .map(
-  //     (k) => `${renderComment(k.comment)}export namespace ${k.name}{
-  //     ${renderFunction(k.functions, apiName)}
-  //   }`
-  //   )
-  //   .join("\n\n");
-
   return list
     .map(
-      (k) => `
-        ${renderComment(k.comment + "\n" + k.name)}
-        ${renderFunction(k.functions, apiName, apiPrefixPath, messageMap)}
-      `
+      (k) => `${renderComment(k.comment)}export namespace ${k.name}{
+      ${renderFunction(k.functions, apiName, apiPrefixPath, messageMap)}
+    }`
     )
     .join("\n\n");
+
+  // 原来用的这个，换成上面那个带namespace的
+  // return list
+  //   .map(
+  //     (k) => `
+  //       ${renderComment(k.comment + "\n" + k.name)}
+  //       ${renderFunction(k.functions, apiName, apiPrefixPath, messageMap)}
+  //     `
+  //   )
+  //   .join("\n\n");
 }
 
 export function genApiFileCode(
@@ -312,9 +316,9 @@ export function genApiFileCode(
   return `// This is code generated automatically by the proto2api, please do not modify
   ${renderComment(apiInfo.comment)}
   ${renderImport(apiInfo.imports, messageMap)}
-  ${renderEnum(apiInfo.enums)}
-  ${renderInterface(apiInfo.interfaces, messageMap)}
   ${renderApiModule(apiInfo.apiModules, apiName, apiPrefixPath, messageMap)}
+  ${renderInterface(apiInfo.interfaces, messageMap)}
+  ${renderEnum(apiInfo.enums)}
   `;
 }
 

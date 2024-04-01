@@ -6,6 +6,29 @@ import "test/srv2.proto";
 
 message MainMsg {
   otter_pkg.OtterMsg field_otterMsg = 2;
-  Srv2 field_srv2=3;
+  Srv2 field_srv2 = 3;
 }
 
+enum Kind {
+  RoomDiff = 0;     // 房费差额
+  ShortRental = 1;  // 短租房费
+  LongRental = 2;   // 长租房费
+  Water = 3;        // 水
+  Electricity = 4;  // 电
+  Gas = 5;          // 煤
+  Network = 6;      // 网
+  Extra = 7;        // 杂费
+  Deposit = 8;      // 押金
+  Landlord = 101;   // 房东出账
+  Management = 102; // 管理费出账
+}
+
+service BillService {
+  rpc Create(MainMsg) returns (MainMsg) {}
+  rpc CreateByRoomIds(MainMsg) returns (MainMsg) {}
+
+  rpc BatchDel(MainMsg) returns (MainMsg) {}
+  rpc BatchDelByShareId(MainMsg) returns (MainMsg) {}
+
+  rpc Update(MainMsg) returns (MainMsg) {}
+}
