@@ -1,0 +1,6 @@
+syntax = "proto3";
+package srv22;
+
+message MainMsg22 {
+  string field_srv2 = 3;
+}

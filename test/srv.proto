@@ -3,10 +3,12 @@ package srv;
 
 import "test/otter_pkg.proto";
 import "test/srv2.proto";
+import "test22/srv.proto";
 
 message MainMsg {
   otter_pkg.OtterMsg field_otterMsg = 2;
   Srv2 field_srv2 = 3;
+  srv22.MainMsg22 s = 4;
 }
 
 enum Kind {

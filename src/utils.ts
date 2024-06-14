@@ -44,7 +44,7 @@ export const isPrototype = (original: any, target: any) => {
  * @returns
  */
 export function getRelativePathABDepth(pathA, pathB, depth = 0) {
-  if (pathA.startsWith(pathB)) {
+  if (pathA.startsWith(pathB + "/")) {
     const path = pathA.replace(pathB, "").slice(1);
     if (depth === 0) {
       return "./" + path;

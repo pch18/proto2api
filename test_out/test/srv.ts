@@ -5,6 +5,7 @@
 import { webapi } from '~/utils/api';
 import { OtterMsg } from './otter_pkg';
 import { Srv2 } from './srv2';
+import { MainMsg22 } from '../test22/srv';
 export namespace BillService {
   export function Create(req: MainMsg, config?: any) {
     return webapi.post<MainMsg>('/BillService/Create', req, config);
@@ -29,6 +30,7 @@ export namespace BillService {
 export interface MainMsg {
   field_otterMsg: OtterMsg;
   field_srv2: Srv2;
+  s: MainMsg22;
 }
 export enum Kind {
   // 房费差额

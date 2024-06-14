@@ -148,6 +148,7 @@ export function pathPreprocessing(
           0,
           apiFile.protoTargetPath.lastIndexOf("/")
         );
+        // debugger
         k.moduleSpecifier = getRelativePathABDepth(pathA, pathB);
       }
     });
