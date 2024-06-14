@@ -1,6 +1,6 @@
 {
   "name": "protoc-gen-ts-req",
-  "version": "0.0.18",
+  "version": "0.0.19",
   "description": "Convert proto file to api file",
   "bin": {
     "protoc-gen-ts-req": "./bin/index"
