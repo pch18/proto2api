@@ -247,7 +247,7 @@ export function serviceGenApiFunction(item: protoJs.Service): ApiModule {
     name: item.name,
     functions: item.methodsArray.map((k) => {
       const httpType = getHttpType(k.options);
-      let url = httpType.url || `/${item.name}@${k.name}`;
+      let url = httpType.url || `/${item.name}_${k.name}`;
 
       // console.log( httpType.url ,item.name)
 
